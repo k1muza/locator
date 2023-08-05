@@ -38,3 +38,8 @@ def get_ip_location(ip: str):
 def get_location(request: Request):
     ip = request.client.host
     return {"countryCode": get_country_code(ip)}
+
+@app.get("/ip/")
+def get_location(request: Request):
+    ip = request.client.host
+    return {"ipAddress": ip}
