@@ -1,11 +1,9 @@
-import os
 from functools import lru_cache
 from fastapi import FastAPI, HTTPException, Request
 from geoip2.database import Reader
 from geoip2.errors import AddressNotFoundError
-import requests
 
-TOKEN = os.getenv('IPAPI_TOKEN')
+from utils.methods import get_location_from_api, get_ip_from_request
 
 app = FastAPI()
 
@@ -30,9 +28,8 @@ def get_country_code(ip_address: str):
         country_code = response.country.iso_code
         return country_code
     except AddressNotFoundError:
-        res = requests.get(f'http://api.ipapi.com/api/{ip_address}?access_key=${TOKEN}')
-        return res.json().get('country_code')
-    except Exception as e:
+        return get_location_from_api(ip_address)
+    except Exception:
         raise HTTPException(status_code=500, detail="Unexpected error occurred")
 
 @app.get("/location/{ip}")
@@ -41,10 +38,10 @@ def get_ip_location(ip: str):
 
 @app.get("/location/")
 def get_location(request: Request):
-    ip = request.client.host
-    return {"countryCode": get_country_code(ip)}
+    client_ip = get_ip_from_request(request)
+    return {"countryCode": get_country_code(client_ip)}
 
 @app.get("/ip/")
 def get_location(request: Request):
-    ip = request.client.host
-    return {"request.client.host": ip, "x-forwarded-for": request.headers.get("X-Forwarded-For")}
+    client_ip = get_ip_from_request(request)
+    return {"ipAddress": client_ip}
