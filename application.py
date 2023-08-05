@@ -1,10 +1,11 @@
+import os
 from functools import lru_cache
 from fastapi import FastAPI, HTTPException, Request
 from geoip2.database import Reader
 from geoip2.errors import AddressNotFoundError
 import requests
 
-TOKEN = "7f6994491503c7dbc3094c301bef72b1"
+TOKEN = os.getenv('IPAPI_TOKEN')
 
 app = FastAPI()
 
