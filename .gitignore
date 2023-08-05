@@ -25,3 +25,8 @@ archive.zip
 *~
 .*.sw?
 .cache
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
