@@ -1,11 +1,25 @@
 from functools import lru_cache
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from geoip2.database import Reader
 from geoip2.errors import AddressNotFoundError
 
 from utils.methods import get_location_from_api, get_ip_from_request
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:8000",  
+    "https://afriscores.com",  
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"], 
+    allow_headers=["*"], 
+)
 
 reader = None  # Will hold our MaxMind DB reader
 
