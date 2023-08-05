@@ -1,4 +1,5 @@
 from functools import lru_cache
+import os
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from geoip2.database import Reader
@@ -9,8 +10,8 @@ from utils.methods import get_location_from_api, get_ip_from_request
 app = FastAPI()
 
 origins = [
-    "http://localhost:8000",  
-    "https://afriscores.com",  
+    os.getenv('TEST_URL'),
+    os.getenv('LIVE_URL'),  
 ]
 
 app.add_middleware(
