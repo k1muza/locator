@@ -30,6 +30,20 @@ uvicorn main:app --reload
 ### Caching
 The API uses Python's built-in functools.lru_cache for caching. This means that if an IP address's geolocation information has been requested before, it will be retrieved from cache, which is significantly faster than querying the database.
 
+## Setup
+
+To set up the local development environment, you'll need to configure some environment variables. These are stored in a `.env` file, which should be located at the root of the project. This file is not checked into version control to keep sensitive data secure.
+
+### `.env` file format
+
+The `.env` file should contain the following variables:
+*TEST_URL=<Your Test URL>
+*LIVE_URL=<Your Live URL>
+*IPAPI_TOKEN=<Your IPAPI Token>
+
+Replace the placeholders (`<Your Test URL>`, `<Your Live URL>`, `<Your IPAPI Token>`) with the appropriate values.
+Once you have created and populated the `.env` file, the application will automatically load these values on startup for local development.
+
 ### License
 #### MIT License
 Permission is hereby granted, free of charge, to any person obtaining a copy of this code and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
