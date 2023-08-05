@@ -47,4 +47,4 @@ def get_location(request: Request):
 @app.get("/ip/")
 def get_location(request: Request):
     ip = request.client.host
-    return {"ipAddress": ip}
+    return {"request.client.host": ip, "x-forwarded-for": request.headers.get("X-Forwarded-For")}
