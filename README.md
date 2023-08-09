@@ -37,9 +37,9 @@ To set up the local development environment, you'll need to configure some envir
 ### `.env` file format
 
 The `.env` file should contain the following variables:
-*TEST_URL=<Your Test URL>
-*LIVE_URL=<Your Live URL>
-*IPAPI_TOKEN=<Your IPAPI Token>
+* TEST_URL=`<Your Test URL>`
+* LIVE_URL=`<Your Live URL>`
+* IPAPI_TOKEN=`<Your IPAPI Token>`
 
 Replace the placeholders (`<Your Test URL>`, `<Your Live URL>`, `<Your IPAPI Token>`) with the appropriate values.
 Once you have created and populated the `.env` file, the application will automatically load these values on startup for local development.
