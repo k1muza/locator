@@ -9,10 +9,7 @@ from utils.methods import get_location_from_api, get_ip_from_request
 
 app = FastAPI()
 
-origins = [
-    os.getenv('TEST_URL'),
-    os.getenv('LIVE_URL'),  
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -47,11 +44,11 @@ def get_country_code(ip_address: str):
     except Exception:
         raise HTTPException(status_code=500, detail="Unexpected error occurred")
 
-@app.get("/location/{ip}")
+@app.get("/locate/{ip}")
 def get_ip_location(ip: str):
     return {"countryCode": get_country_code(ip)}
 
-@app.get("/location/")
+@app.get("/locate/")
 def get_location(request: Request):
     client_ip = get_ip_from_request(request)
     return {"countryCode": get_country_code(client_ip)}
